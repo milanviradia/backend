@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.bloodbank.backend.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ import com.bloodbank.backend.repository.UserRepository;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -43,6 +47,14 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
+    @GetMapping("/users/sendpasswordemail/{emailId}")
+    public String updatePasswordByEmail(@PathVariable(value = "emailId") String userEmail)
+    {
+        String password = emailService.sendPasswordByEmail(userEmail);
+        userRepository.updatePassword(password, userEmail);
+        return  "success";
+    }
+
     @PostMapping("/users")
     public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
@@ -54,9 +66,9 @@ public class UserController {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("user not found for this id :: " + userId));
 
+        user.setName(userDetails.getName());
         user.setEmailId(userDetails.getEmailId());
-        user.setLastName(userDetails.getLastName());
-        user.setFirstName(userDetails.getFirstName());
+        user.setMobileNumber(userDetails.getMobileNumber());
         final User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
     }
