@@ -11,11 +11,12 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
+@Transactional
 public interface UserRepository extends JpaRepository<User, Long>{
+
     @Query("select u from User u where u.emailId = ?1")
     Optional<User> findByEmail(String userEmail);
 
-    @Transactional
     @Modifying
     @Query("UPDATE User u set u.passWord = ?1 WHERE u.emailId=?2 ")
     void updatePassword(String password , String userEmail);

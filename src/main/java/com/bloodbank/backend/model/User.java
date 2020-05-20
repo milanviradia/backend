@@ -1,29 +1,23 @@
 package com.bloodbank.backend.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     private long id;
-    private String Name;
+    private String userName;
     private String emailId;
-    private long mobileNumber;
-    private  String passWord;
+    private String mobileNumber;
+    private String passWord;
 
     public User() {
-
     }
 
-    public User(String Name, String emailId, long mobileNumber, String passWord)
+    public User(String userName, String emailId, String mobileNumber, String passWord)
     {
-        this.Name = Name;
+        this.userName = userName;
         this.emailId = emailId;
         this.mobileNumber = mobileNumber;
         this.passWord = passWord;
@@ -39,11 +33,12 @@ public class User {
     }
 
     @Column(name = "name", nullable = false)
-    public String getName() {
-        return Name;
+    public String getUserName() {
+        return userName;
     }
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setUserName(String userName) {
+        System.out.println("Entity Name::"+userName);
+        this.userName = userName;
     }
 
     @Column(name = "email_address", nullable = false)
@@ -55,8 +50,8 @@ public class User {
     }
 
     @Column(name = "mobile_number", nullable = false)
-    public long getMobileNumber() { return mobileNumber; }
-    public void setMobileNumber(long mobileNumber) { this.mobileNumber = mobileNumber; }
+    public String getMobileNumber() { return mobileNumber; }
+    public void setMobileNumber(String mobileNumber) { this.mobileNumber = mobileNumber; }
 
     @Column(name = "password", nullable = false)
     public String getPassWord() { return passWord; }
@@ -64,7 +59,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", Name=" + Name + ", emailId=" + emailId
-        + "mobileNumber=" + mobileNumber + "passWord=" + passWord  + "]";
+        return "User [id=" + id + ", userName=" + userName + ", emailId=" + emailId
+        + ", mobileNumber=" + mobileNumber + ", passWord=" + passWord  + "]";
     }
 }
