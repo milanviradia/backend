@@ -1,4 +1,5 @@
 package com.bloodbank.backend.model;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -6,13 +7,26 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
     private String userName;
     private String emailId;
     private String mobileNumber;
     private String passWord;
+    
+    @OneToMany(targetEntity = Address.class,cascade=CascadeType.ALL)
+    @JoinColumn(name="user_fk",referencedColumnName= "id")
+    private List<Address> address;
+    public List<Address> getAddress() {
+		return address;
+	}
 
-    public User() {
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+	public User() {
     }
 
     public User(String userName, String emailId, String mobileNumber, String passWord)
@@ -22,9 +36,7 @@ public class User {
         this.mobileNumber = mobileNumber;
         this.passWord = passWord;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   
     public long getId() {
         return id;
     }

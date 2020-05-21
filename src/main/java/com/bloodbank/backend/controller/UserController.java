@@ -1,5 +1,4 @@
 package com.bloodbank.backend.controller;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,17 +13,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.bloodbank.backend.model.Address;
 import com.bloodbank.backend.model.User;
 import com.bloodbank.backend.beans.UserDTO;
 import com.bloodbank.backend.repository.UserRepository;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
 
-//sudo lsof -t -i tcp:4200 | xargs kill -9
 @RestController @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private UserRepository addressRepository;
 
     @Autowired
     private UserService userService;
@@ -115,5 +117,18 @@ public class UserController {
     public User convertToEntity(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         return user;
+    }
+    
+    @PostMapping("/donnerList1")
+    public void demo(String s) {
+    	System.out.println(s);
+    }
+    
+    @GetMapping("/donnerList")
+    public List<UserDTO> getDonners(@Valid @RequestBody Address address) {
+    	 List<User> users = userService.getAllNearByUsers(address);
+         return users.stream()
+                 .map(this::convertToDto)
+                 .collect(Collectors.toList());
     }
 }
