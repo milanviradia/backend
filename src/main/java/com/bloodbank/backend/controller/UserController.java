@@ -3,19 +3,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import com.bloodbank.backend.service.UserService;
-import org.modelmapper.ModelMapper;
 import com.bloodbank.backend.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.bloodbank.backend.model.Address;
 import com.bloodbank.backend.model.User;
-import com.bloodbank.backend.beans.UserDTO;
 import com.bloodbank.backend.repository.UserRepository;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
 
@@ -24,31 +18,23 @@ import com.bloodbank.backend.exception.ResourceNotFoundException;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
-    
-    @Autowired
-    private UserRepository addressRepository;
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
     private EmailService emailService;
 
     @GetMapping("/users")
-    public List<UserDTO> getAllUsers() {
+    public List<User> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        return users.stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
+        return users.stream().collect(Collectors.toList());
     }
     @GetMapping("/users/id/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Long userId)
+    public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId)
     {
         User user = userService.getUserById(userId).get();
-		    return ResponseEntity.ok().body(convertToDto(user));
+		    return ResponseEntity.ok().body(user);
     }
 
     @GetMapping("/users/email/{emailId}")
@@ -70,10 +56,8 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@Valid @RequestBody UserDTO userDTO) {
-
-        System.out.println("UserDetails "+userDTO.getClass());
-        return userService.createUser(convertToEntity(userDTO));
+    public User createUser(@Valid @RequestBody User user) {
+        return userService.createUser(user);
     }
 
     @PutMapping("/users/id/{id}")
@@ -108,27 +92,19 @@ public class UserController {
         userRepository.updatePassword(password, userEmail);
         return  "Password Sent Successfully.";
     }
-
-    public UserDTO convertToDto(User user) {
-        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
-        return userDTO;
-    }
-
-    public User convertToEntity(UserDTO userDTO) {
-        User user = modelMapper.map(userDTO, User.class);
-        return user;
-    }
     
     @PostMapping("/donnerList1")
     public void demo(String s) {
     	System.out.println(s);
     }
     
-    @GetMapping("/donnerList")
-    public List<UserDTO> getDonners(@Valid @RequestBody Address address) {
-    	 List<User> users = userService.getAllNearByUsers(address);
-         return users.stream()
-                 .map(this::convertToDto)
-                 .collect(Collectors.toList());
+    @PostMapping("/donnerList")
+    public void getDonners(@Valid @RequestBody User user) {
+    	System.out.println(user);
+//    	 List<User> users = userService.getAllNearByUsers(address);
+//    	 return users.stream()
+//                 .map(this::convertToDto)
+//                 .collect(Collectors.toList());
+    
     }
 }

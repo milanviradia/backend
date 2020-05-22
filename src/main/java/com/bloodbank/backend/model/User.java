@@ -1,6 +1,4 @@
 package com.bloodbank.backend.model;
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,30 +12,86 @@ public class User {
     private String emailId;
     private String mobileNumber;
     private String passWord;
+    private int age;
+    private String country;
+    private String state;
+    private String city;
+    private Long zipcode;
+    private String bloodGroup;
     
-    @OneToMany(targetEntity = Address.class,cascade=CascadeType.ALL)
-    @JoinColumn(name="user_fk",referencedColumnName= "id")
-    private List<Address> address;
-    public List<Address> getAddress() {
-		return address;
+    public int getAge() {
+		return age;
 	}
 
-	public void setAddress(List<Address> address) {
-		this.address = address;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
-	public User() {
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    public User(String userName, String emailId, String mobileNumber, String passWord)
-    {
-        this.userName = userName;
-        this.emailId = emailId;
-        this.mobileNumber = mobileNumber;
-        this.passWord = passWord;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public String getBloodGroup() {
+		return bloodGroup;
+	}
+
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+    
    
-    public long getId() {
+    public User(String userName, String emailId, String mobileNumber, String passWord, int age, String country,
+			String state, String city, Long zipcode, String bloodGroup) {
+		super();
+		this.userName = userName;
+		this.emailId = emailId;
+		this.mobileNumber = mobileNumber;
+		this.passWord = passWord;
+		this.age = age;
+		this.country = country;
+		this.state = state;
+		this.city = city;
+		this.zipcode = zipcode;
+		this.bloodGroup = bloodGroup;
+	}
+
+	public Long getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(Long zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userName=" + userName + ", emailId=" + emailId + ", mobileNumber=" + mobileNumber
+				+ ", passWord=" + passWord + ", age=" + age + ", country=" + country + ", state=" + state + ", city="
+				+ city + ", zipcode=" + zipcode + ", bloodGroup=" + bloodGroup + "]";
+	}
+
+	public long getId() {
         return id;
     }
     public void setId(long id) {
@@ -69,9 +123,4 @@ public class User {
     public String getPassWord() { return passWord; }
     public void setPassWord(String passWord) { this.passWord = passWord; }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", userName=" + userName + ", emailId=" + emailId
-        + ", mobileNumber=" + mobileNumber + ", passWord=" + passWord  + "]";
-    }
 }
