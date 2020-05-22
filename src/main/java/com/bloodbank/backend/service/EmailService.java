@@ -23,8 +23,8 @@ public class EmailService
         mail.setFrom("no-reply@gmail.com");
         mail.setTo(EmailId);
         mail.setSubject("BloodBank Portal Password");
-        mail.setText("Dear " + EmailId + ", \nYour temporary password for BloodBank portal is: \n"
-                + password + ". "+
+        mail.setText("Dear " + EmailId + ", \nYour temporary password for BloodBank portal is:"
+                + password +
                 "\nPlease, Change your password after Signin.");
 
         javaMailSender.send(mail);
