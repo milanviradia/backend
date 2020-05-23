@@ -12,7 +12,7 @@ public class SmsService {
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                 new PhoneNumber(mobile_no),
-                new PhoneNumber("+12029336716"),
+                new PhoneNumber("+"),
                 "**Raktdaan Mahadaan**\n You can save a life by reaching at below location as soon as possible.\nAddress:"+address).create();
         System.out.println(message.getSid());
 	}

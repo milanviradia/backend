@@ -37,7 +37,4 @@ public class UserDTO implements Serializable{
 	public String toString() {
 		return "userDTO [name=" + name + ", mobileNumber=" + mobileNumber + ", bloodGroup=" + bloodGroup + "]";
 	}
-	
-	
-	
 }
