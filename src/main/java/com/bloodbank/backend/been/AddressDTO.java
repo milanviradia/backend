@@ -2,19 +2,15 @@ package com.bloodbank.backend.been;
 
 import java.util.List;
 
-public class AddressDTO {
+public class AddressDTO{
 	private List<UserDTO> users;
 	private String address;
-	
 	public AddressDTO() {}
-	
 	public AddressDTO(List<UserDTO> users, String address) {
 		super();
 		this.users = users;
 		this.address = address;
 	}
-	
-	
 	public List<UserDTO> getUsers() {
 		return users;
 	}
