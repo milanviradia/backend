@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import com.bloodbank.backend.model.User;
 import com.bloodbank.backend.repository.UserRepository;
 import com.bloodbank.backend.been.UserDTO;
+import com.bloodbank.backend.been.AddressDTO;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
 
 @RestController @CrossOrigin(origins = "http://localhost:4200")
@@ -87,7 +88,7 @@ public class UserController {
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
         return userDTO;
     }
-
+    
     @DeleteMapping("/users/id/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
@@ -124,9 +125,10 @@ public class UserController {
     }
 	
 	@PostMapping("/sendSMS")
-    public void sendSMS() {
-		smsService.sendSMS();
+    public void sendSMS(@Valid @RequestBody AddressDTO addressDTO) {
+		List<UserDTO> user = addressDTO.getUsers();
+		String address = addressDTO.getAddress();
+		for(UserDTO u:user) smsService.sendSMS(u.getMobileNumber(),address);
     }
-	
 	
 }
