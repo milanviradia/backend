@@ -6,11 +6,15 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import com.bloodbank.backend.service.UserService;
 import com.bloodbank.backend.service.EmailService;
+import com.bloodbank.backend.service.SmsService;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bloodbank.backend.model.User;
 import com.bloodbank.backend.repository.UserRepository;
+import com.bloodbank.backend.been.UserDTO;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
 
 @RestController @CrossOrigin(origins = "http://localhost:4200")
@@ -21,9 +25,15 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private SmsService smsService;
 
     @Autowired
     private EmailService emailService;
+    
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -72,6 +82,11 @@ public class UserController {
         final User updatedUser = userService.updateUser(user);
         return ResponseEntity.ok(updatedUser);
     }
+    
+    public UserDTO convertToDto(User user) {
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        return userDTO;
+    }
 
     @DeleteMapping("/users/id/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId)
@@ -98,13 +113,20 @@ public class UserController {
     	System.out.println(s);
     }
     
-    @PostMapping("/donnerList")
-    public void getDonners(@Valid @RequestBody User user) {
+	@PostMapping("/donnerList")
+    public List<UserDTO> getDonners(@Valid @RequestBody User user) {
     	System.out.println(user);
-//    	 List<User> users = userService.getAllNearByUsers(address);
-//    	 return users.stream()
-//                 .map(this::convertToDto)
-//                 .collect(Collectors.toList());
-    
+    	List<User> users = userService.getAllNearByUsers(user);
+    	return users.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+
     }
+	
+	@PostMapping("/sendSMS")
+    public void sendSMS() {
+		smsService.sendSMS();
+    }
+	
+	
 }

@@ -16,7 +16,7 @@ public class User {
     private String country;
     private String state;
     private String city;
-    private Long zipcode;
+    private long zipcode;
     private String bloodGroup;
     
     public int getAge() {
@@ -60,9 +60,9 @@ public class User {
 		this.bloodGroup = bloodGroup;
 	}
     
-   
+	 public User() {}
     public User(String userName, String emailId, String mobileNumber, String passWord, int age, String country,
-			String state, String city, Long zipcode, String bloodGroup) {
+			String state, String city, long zipcode, String bloodGroup) {
 		super();
 		this.userName = userName;
 		this.emailId = emailId;
@@ -76,11 +76,11 @@ public class User {
 		this.bloodGroup = bloodGroup;
 	}
 
-	public Long getZipcode() {
+	public long getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(Long zipcode) {
+	public void setZipcode(long zipcode) {
 		this.zipcode = zipcode;
 	}
 

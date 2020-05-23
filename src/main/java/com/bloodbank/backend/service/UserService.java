@@ -8,6 +8,7 @@ public interface UserService {
     List<User> getAllUsers();
     Optional<User> getUserById(Long userId);
     Optional<User> getUserByEmail(String userEmail);
+    List<User> getAllNearByUsers(User user);
     User createUser(User user);
     User updateUser(User user);
     void updateUserPassword(String newPassword, String userEmail);
