@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  database:
+    image: mysql:latest
+    restart: always
+    container_name: database
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'blood_donation_schema'
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - 3306:3306
+    expose:
+      # Opens port 3306 on the container
+      - 3306
+      # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+    healthcheck:
+       test: "/usr/bin/mysql --user=user --password=password--execute \"SHOW DATABASES;\""
+       interval: 2s
+       timeout: 20s
+       retries: 10
+
+
+    networks:
+     - backendNetwork
+     
+  springapi:
+    image: milanviradia/backend:latest
+    container_name: springapi
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/blood_donation_schema?createDatabaseIfNotExist=true&&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password     
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    networks:
+      - backendNetwork
+      - frontendNetwork
+    command: java -jar backend-0.0.1-SNAPSHOT.jar
+
+  angular:
+    image: milanviradia/frontend:latest
+    container_name: angular
+    ports: 
+      - 4200:80
+    depends_on:
+      - springapi
+    networks:
+      - frontendNetwork
+    
+
+volumes:
+  my-db:
+  
+networks:
+  backendNetwork:
+  frontendNetwork:
