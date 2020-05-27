@@ -13,7 +13,7 @@ public class User {
     private String mobileNumber;
     private int age;
     private int type;
-	private String bloodGroup;
+    private String bloodGroup;
     private String country;
     private String state;
     private String city;
@@ -23,7 +23,7 @@ public class User {
     public User(){}
 
     public User(String userName, String emailId, String mobileNumber, int age, String bloodGroup
-                ,String country,String state, String city, Long zipcode, String passWord) {
+            ,String country,String state, String city, Long zipcode, String passWord) {
         super();
         this.userName = userName;
         this.emailId = emailId;
@@ -57,10 +57,10 @@ public class User {
 
     public int getAge() { return age;}
     public void setAge(int age) { this.age = age;}
-    
+
     public int getType() {return type;}
 
-	public void setType(int type) {this.type = type;}
+    public void setType(int type) {this.type = type;}
 
     public String getBloodGroup() {return bloodGroup;}
     public void setBloodGroup(String bloodGroup) { this.bloodGroup = bloodGroup;}
@@ -82,10 +82,10 @@ public class User {
     public void setPassWord(String passWord) { this.passWord = passWord; }
 
     @Override
-	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", emailId=" + emailId + ", mobileNumber=" + mobileNumber
-				+ ", age=" + age + ", type=" + type + ", bloodGroup=" + bloodGroup + ", country=" + country + ", state="
-				+ state + ", city=" + city + ", zipcode=" + zipcode + ", passWord=" + passWord + "]";
-	}
+    public String toString() {
+        return "User [id=" + id + ", userName=" + userName + ", emailId=" + emailId + ", mobileNumber=" + mobileNumber
+                + ", age=" + age + ", type=" + type + ", bloodGroup=" + bloodGroup + ", country=" + country + ", state="
+                + state + ", city=" + city + ", zipcode=" + zipcode + ", passWord=" + passWord + "]";
+    }
 
 }
