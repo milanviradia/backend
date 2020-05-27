@@ -108,6 +108,13 @@ public class UserController {
         userRepository.updatePassword(password, userEmail);
         return  "Password Sent Successfully.";
     }
+
+    @GetMapping("/users/sendemail/{emailId}")
+    public String SendEmail(@PathVariable(value = "emailId") String userEmail)
+    {
+        emailService.sendEmail(userEmail);
+        return  "User Registered Successfully.";
+    }
     
     @PostMapping("/donnerList1")
     public void demo(String s) {

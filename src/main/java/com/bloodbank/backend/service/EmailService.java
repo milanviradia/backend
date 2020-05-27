@@ -22,7 +22,7 @@ public class EmailService
         String password = passwordGenerator();
         mail.setFrom("no-reply@gmail.com");
         mail.setTo(EmailId);
-        mail.setSubject("BloodBank Portal Password");
+        mail.setSubject("Blood Donation Portal Password");
         mail.setText("Dear " + EmailId + ", \nYour temporary password for BloodBank portal is:"
                 + password +
                 "\nPlease, Change your password after Signin.");
@@ -30,6 +30,21 @@ public class EmailService
         javaMailSender.send(mail);
         return password;
     }
+
+    public String sendEmail(String EmailId) throws MailException{
+        SimpleMailMessage mail = new SimpleMailMessage();
+        String password = passwordGenerator();
+        mail.setFrom("no-reply@gmail.com");
+        mail.setTo(EmailId);
+            mail.setSubject("Blood Donation Portal Admin");
+        mail.setText("Dear " + EmailId + ", \nThank you for registering in Blood Donation Portal.\n" +
+                "You will be notified through your registered mobile number if any emergency blood " +
+                "requirement in your nearby area.");
+
+        javaMailSender.send(mail);
+        return password;
+    }
+
 
     public String passwordGenerator() {
         String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
