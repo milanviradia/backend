@@ -7,7 +7,7 @@ pipeline {
                 sh "mvn compile"
             }
         }
-        stage('Test') { 
+        stage('Junit Testing') {
             steps {
                 sh "mvn test"
             }
@@ -24,7 +24,7 @@ pipeline {
         		}
       		}
     	}
-    	stage('Push Image') {
+    	stage('Push Backend Image') {
       		steps {
         		script {
           			    docker.withRegistry( '', 'dockerhubCredentials' ) {
@@ -34,7 +34,7 @@ pipeline {
       		}
     	}
     	
-    	stage('Build Frontend Image') {
+    	stage('Build & Push Frontend Image') {
         steps {
             dir("frontend")
             {
