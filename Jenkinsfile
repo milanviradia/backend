@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('SCM Checkout'){
             steps {
-            git credentialsId: 'githubCredentials', url: 'https://github.com/milanviradia/backend'
+                git url: 'https://github.com/milanviradia/BloodDonationPortal'
             }
         }
         
@@ -23,7 +23,7 @@ pipeline {
                 sh "mvn package"
             }
         }
-        stage('Build Image') {
+        stage('Build Backend Image') {
       		steps {
         		script {
           			dockerImage = docker.build "milanviradia/backend" + ":latest"
@@ -33,11 +33,30 @@ pipeline {
     	stage('Push Image') {
       		steps {
         		script {
-          			docker.withRegistry( '', 'dockerhubCredentials' ) {
+          			    docker.withRegistry( '', 'dockerhubCredentials' ) {
             			dockerImage.push()
           			}
         		}
       		}
     	}
+    	
+    	stage('Build Frontend Image') {
+        steps {
+            dir("frontend")
+            {
+                script {
+                dockerImage = docker.build "milanviradia/frontend" + ":latest"
+                docker.withRegistry( '', 'dockerhubCredentials' ) {
+            	dockerImage.push()}
+                }
+            }
+        }
+    }
+    
+    stage('Trigger Rundeck'){
+    		steps {
+    			build 'miniproject_job'
+    		}
+        }
     }
 }
