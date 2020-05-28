@@ -1,0 +1,32 @@
+<h3>Add User</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      		<label for="name">Name</label>
+      		<input type="text" class="form-control" id="Name" required [(ngModel)]="user.userName" 
+		name="Name" placeholder="Enter Name">	
+    		</div>
+
+    		<div class="form-group">
+      		<label for="name">Email</label>
+     			<input type="email" class="form-control" id="emailId" required [(ngModel)]="user.emailId"  
+			name="emailId" placeholder="Enter email">
+    		</div>
+
+		<div class="form-group">
+      		<label for="name">Mobile Number</label>
+			<input type="text" class="form-control" id="mobileNumber" required [(ngModel)]="user.mobileNumber" 
+			name="mobileNumber" placeholder="Enter Mobile no.">
+    		</div>
+
+		<div class="form-group">
+      		<label for="name">Password</label>
+		     	<input type="password" class="form-control" id="passWord" required [(ngModel)]="user.passWord" 
+			name="passWord" placeholder="Enter Password">
+    		</div>
+
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+

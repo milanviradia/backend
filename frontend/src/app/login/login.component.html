@@ -1,0 +1,34 @@
+<div class="container col-lg-6">
+    <h1>Doctor Login</h1>
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="form-group">
+	<div class="alert alert-warning" *ngIf='!validLogin'>Email or Password incorrect.</div>
+          	<div class="form-group">
+      		<label for="name">Email</label>
+     			<input type="text"  formControlName="email" class="form-control is-invalid" [(ngModel)]="email"
+			[ngClass]="{ 'is-invalid': submitted && f.email.errors }" 				 
+			id="emailId" placeholder="Enter Email">
+
+                	<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        	<div *ngIf="f.email.errors.required">Email is required</div>
+                    	</div>
+    		</div>
+
+          	<div class="form-group">
+      		<label for="name">Password</label>
+		     	<input type="password" formControlName="password" class="form-control is-invalid" 
+			[ngClass]="{ 'is-invalid': submitted && f.password.errors}" 
+			id="passWord" [(ngModel)]="password" placeholder="Enter Password">
+			
+			<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        	<div *ngIf="f.password.errors.required">Password is required</div>
+			</div>
+    		</div>
+
+          <button class="btn btn-success">Login</button>
+	  <button (click)=handleForgotpassword() class="btn btn-link"><u>Forgot Password?</u></button>
+        </form>
+      </div>
+    </div>
+  </div>

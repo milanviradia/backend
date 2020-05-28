@@ -18,11 +18,14 @@ target/
 *.iws
 *.iml
 *.ipr
+/frontend/dist/
+/frontend/node_modules
 
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/dist/
+/frontend/dist/
+/frontend/node_modules
 /nbdist/
 /.nb-gradle/
 build/

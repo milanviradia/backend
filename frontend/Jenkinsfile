@@ -1,0 +1,27 @@
+pipeline {
+    agent any 
+    stages {
+        stage('SCM Checkout'){
+            steps {
+            git url: 'https://github.com/milanviradia/frontend'
+            }
+        }
+        
+        stage('Build Image') {
+      		steps {
+        		script {
+          			dockerImage = docker.build "milanviradia/frontend" + ":latest"
+        		}
+      		}
+    	}
+    	stage('Push Image') {
+      		steps {
+        		script {
+          			docker.withRegistry( '', 'dockerhubCredentials' ) {
+            			dockerImage.push()
+          			}
+        		}
+      		}
+    	}
+    }
+}

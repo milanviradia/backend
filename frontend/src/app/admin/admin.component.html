@@ -1,0 +1,29 @@
+<div class="container col-lg-6">
+    <div class="header">
+        <h1>Admin Login</h1>
+    </div>
+    <form (ngSubmit)="login()">
+        <mat-card>
+            <div class="card-body">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input matInput [formControl]="usernameFormControl" required>
+                    <mat-error *ngIf="usernameFormControl.hasError('required')">
+                        <strong>Username is required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [formControl]="passwordFormControl" required>
+                    <mat-error *ngIf="passwordFormControl.hasError('required')">
+                        <strong>Password is required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <br>
+                <div><button type="submit" mat-raised-button color="primary">Submit</button></div>
+    
+            </div>
+        </mat-card>
+    </form>
+</div>
