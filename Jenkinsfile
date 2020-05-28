@@ -58,7 +58,6 @@ pipeline {
                     shouldWaitForRundeckJob: true,
                     tailLog: true])
               }
-           echo "Rundeck here"
         }
     }
     }
