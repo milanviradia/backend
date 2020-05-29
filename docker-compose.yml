@@ -14,7 +14,7 @@ services:
       MYSQL_PASSWORD: 'password'
     volumes:
       - my-db:/var/lib/mysql
-      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./data/data.sql:/docker-entrypoint-initdb.d/data.sql
     healthcheck:
        test: "/usr/bin/mysql --user=user --password=password--execute \"SHOW DATABASES;\""
        interval: 2s
