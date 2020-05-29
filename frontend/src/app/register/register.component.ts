@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   stateInfo: any[] = [];
   countryInfo: any[] = [];
   cityInfo: any[] = [];
-  bloodGroupList: any = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O', 'O-']
+  bloodGroupList: any = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
   registerForm: FormGroup;
   submitted = false;
   user: User = new User();

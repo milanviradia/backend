@@ -7,7 +7,7 @@ import com.twilio.type.PhoneNumber;
 @Service
 public class SmsService {
 	public static final String ACCOUNT = "AC572a0b8b224fcc72367caa475808fd37";
-	public static final String AUTH = "5b0c5ebbd6da253921bdf1b6e285e0e8";
+	public static final String AUTH = "71e40b4695a556a807be610a23bc1083";
 	public void sendSMS(String mobile_no,String address) {
 		Twilio.init(ACCOUNT, AUTH);
 		mobile_no = "+91"+mobile_no;

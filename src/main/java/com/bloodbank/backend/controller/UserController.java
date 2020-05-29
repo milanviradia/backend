@@ -58,12 +58,12 @@ public class UserController {
     }
 
     @PutMapping("/users/updatepassword/{emailId}")
-    public ResponseEntity<User> updateUserPassword(@PathVariable(value = "emailId") String userEmail,
+    public String updateUserPassword(@PathVariable(value = "emailId") String userEmail,
                                      @Valid @RequestBody String newpassWord)
     {
         User user = userService.getUserByEmail(userEmail).get();
         userRepository.updatePassword(newpassWord, userEmail);
-        return  ResponseEntity.ok(user);
+        return  "Password Changed Successfully";
     }
 
     @PostMapping("/users")
@@ -80,6 +80,13 @@ public class UserController {
         user.setUserName(userDetails.getUserName());
         user.setEmailId(userDetails.getEmailId());
         user.setMobileNumber(userDetails.getMobileNumber());
+        user.setAge(userDetails.getAge());
+        user.setBloodGroup(userDetails.getBloodGroup());
+        user.setCountry(userDetails.getCountry());
+        user.setState(userDetails.getState());
+        user.setCity(userDetails.getCity());
+        user.setZipcode(userDetails.getZipcode());
+
         final User updatedUser = userService.updateUser(user);
         return ResponseEntity.ok(updatedUser);
     }

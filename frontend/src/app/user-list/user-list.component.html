@@ -11,7 +11,6 @@
           <th>Mobile No.</th>
           <th>Age</th>
           <th>Blood Group</th>
-          <th>State</th>
           <th>City</th>
 	  <th>Actions</th>
         </tr>
@@ -23,7 +22,6 @@
 	  <td>{{user.mobileNumber}}</td>
 	  <td>{{user.age}}</td>
           <td>{{user.bloodGroup}}</td>
-          <td>{{user.state}}</td>
 	  <td>{{user.city}}</td>
           <td><button (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
               <button (click)="updateUser(user.id)" class="btn btn-info" style="margin-left: 10px">Update</button>

@@ -1,5 +1,4 @@
 package com.bloodbank.backend;
-
 import com.bloodbank.backend.controller.UserController;
 import com.bloodbank.backend.repository.UserRepository;
 import com.bloodbank.backend.service.EmailService;

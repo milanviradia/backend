@@ -27,7 +27,7 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
 	this.changePasswordForm = this.formBuilder.group(
 	{currentpassWord: ['', Validators.required],
-	 newpassWord: ['', Validators.required, Validators.minLength(6)],
+	 newpassWord: ['', [Validators.required, Validators.minLength(6)]],
 	 confirmnewpassWord: ['', Validators.required]},
 	{
             validator: MustMatch('newpassWord', 'confirmnewpassWord')
@@ -43,6 +43,7 @@ export class ChangePasswordComponent implements OnInit {
     console.log("Loggedin User = " + user + " New password = " + this.newpassWord );
     this.userService.updatePassword(user, this.newpassWord)
       .subscribe(data => console.log(data), error => console.log(error));
+      this.onReset();
     //this.gotoList();
   }
 

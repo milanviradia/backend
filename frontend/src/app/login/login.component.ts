@@ -47,6 +47,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['users']);
           else if(data.type==1)
             this.router.navigate(['patientform']);
+          else if(data.type==2)
+            this.router.navigate(['']);
         }
 
       }, () => {
