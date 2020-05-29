@@ -5,8 +5,8 @@
       <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/" routerLinkActive="active" class="nav-link">Home</a></li>
       <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="admin" class="nav-link" >Admin login</a></li>
 
-     <!-- <li><a *ngIf="loginService.isUserLoggedIn()"routerLink="changepassword" class="nav-link" routerLinkActive="active">Change Password</a></li>
-        -->
+     <li><a *ngIf="loginService.isUserLoggedIn()"routerLink="changepassword" class="nav-link" routerLinkActive="active">Change Password</a></li>
+
       <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Doctor Login</a></li>
 	  <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/register" class="nav-link">Register</a></li><li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">Logout</a></li>
 	</ul>
