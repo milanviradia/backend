@@ -41,7 +41,7 @@ pipeline {
                 script {
                 dockerImage = docker.build "milanviradia/frontend" + ":latest"
                 docker.withRegistry( '', 'dockerhubCredentials' ) {
-            	dockerImage.push()}
+            	dockerImage.push()
                     }
                 }
             }
