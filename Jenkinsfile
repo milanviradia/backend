@@ -41,24 +41,17 @@ pipeline {
                 script {
                 dockerImage = docker.build "milanviradia/frontend" + ":latest"
                 docker.withRegistry( '', 'dockerhubCredentials' ) {
-            	dockerImage.push()}
+            	dockerImage.push()
+                    }
                 }
             }
         }
     }
     
-    stage('Execute Rundeck job') {
-        steps {
-          script {
-              step([$class: "RundeckNotifier",
-                    includeRundeckLogs: true,
-                    jobId: "6978b6ab-2772-4dc9-a361-3e1eb237317b",
-                    rundeckInstance: "rundeck",
-                    shouldFailTheBuild: true,
-                    shouldWaitForRundeckJob: true,
-                    tailLog: true])
-              }
+    stage('Trigger Rundeck'){
+    		steps {
+    			build 'mini_project_job'
+    		}
         }
-    }
     }
 }

@@ -8,7 +8,7 @@ import { Address } from '../address';
 import {FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { CountriesService } from '../service/countries.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -60,7 +60,7 @@ export class PatientFormComponent implements OnInit {
   ]);
   matcher = new MyErrorStateMatcher();
 
-  constructor(fb: FormBuilder,private patientFormService:PatientFormService,private country:CountriesService,) { 
+  constructor(fb: FormBuilder,private patientFormService:PatientFormService,private country:CountriesService,private router: Router) {
     this.noDonnerFound=false;
     this.donnerList=[];
     this.options = fb.group({
@@ -119,6 +119,10 @@ export class PatientFormComponent implements OnInit {
       });
     }
   }
+
+    list(){
+        this.router.navigate(['patientform']);
+     }
 
   sendRequest(){
     this.patientFormService.sendRequest({"users":this.donnerListArray,"address":this.emergencyAddress}).subscribe(data =>
