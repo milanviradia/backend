@@ -120,6 +120,10 @@ export class PatientFormComponent implements OnInit {
     }
   }
 
+    list(){
+        this.router.navigate(['']);
+     }
+
   sendRequest(){
     this.patientFormService.sendRequest({"users":this.donnerListArray,"address":this.emergencyAddress}).subscribe(data =>
     { 
