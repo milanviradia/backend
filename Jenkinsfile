@@ -1,8 +1,5 @@
 pipeline {
     agent any 
-	tools {
-	    maven 'M3'
-	  }
     stages {
         stage('Clean and Compile') { 
             steps {
