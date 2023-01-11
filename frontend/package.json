@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
     "bootstrap": "^4.4.1",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "jquery": "^3.5.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
